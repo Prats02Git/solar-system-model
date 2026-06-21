@@ -148,8 +148,10 @@ export default function SolarSystem() {
         speedRef.current *
         (isMobile ? 0.7 : 1);
 
-      const w = canvas.width;
-      const h = canvas.height;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      const centerX = w / 2;
 
       const centerY = h / 2;
 
@@ -314,7 +316,10 @@ export default function SolarSystem() {
         style={{
           width: "100vw",
           height: "100vh",
-          display: "block"
+          display: "block",
+          position: "fixed",
+          top: 0,
+          left: 0
         }}
       />
     </>
