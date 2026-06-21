@@ -11,7 +11,13 @@ export function drawPlanet(
   ctx.shadowBlur = 20;
   ctx.shadowColor = planet.color;
 
-  const radius = planet.radius * zoom;
+  const radius =
+  Math.sqrt(
+    planet.radiusEarth
+  ) *
+  6 *
+  zoom;
+
 
   if (
     texture &&
