@@ -35,6 +35,7 @@ export default function SolarSystem() {
   const speedRef = useRef(1);
   const zoomRef = useRef(1);
   const trailModeRef = useRef("both");
+  const nebulaRef = useRef([]);
 
   const hoveredRef = useRef(null);
 
@@ -50,6 +51,13 @@ export default function SolarSystem() {
   // INIT ASSETS
   // =========================
   useEffect(() => {
+    const nebula = new Image();
+
+    nebula.src =
+      `${process.env.PUBLIC_URL}/images/nebula.png`;
+
+    nebulaRef.current = nebula;
+
     planets.forEach((planet) => {
       const img = new Image();
       img.src = `${process.env.PUBLIC_URL}/images/${planet.name.toLowerCase()}.png`;
@@ -97,7 +105,16 @@ export default function SolarSystem() {
         () => ({
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          z: Math.random()
+          z: Math.random(),
+          phase: Math.random() * Math.PI * 2,
+          size: Math.random() + 0.5,
+
+          color: [
+            "#ffffff", // white
+            "#dbe9ff", // blue-white
+            "#fff4dd", // warm white
+            "#ffe8c4"  // yellow-white
+          ][Math.floor(Math.random() * 4)]
         })
       );
     };
@@ -156,13 +173,63 @@ export default function SolarSystem() {
       const centerY = h / 2;
 
       // background
-      ctx.fillStyle = "#03000a";
+      const bg = ctx.createRadialGradient(
+        w / 2,
+        h / 2,
+        0,
+        w / 2,
+        h / 2,
+        Math.max(w, h)
+      );
+
+      bg.addColorStop(0, "#101830");
+      bg.addColorStop(0.5, "#070b18");
+      bg.addColorStop(1, "#020308");
+
+      ctx.fillStyle = bg;
       ctx.fillRect(0, 0, w, h);
+
+      if (
+        nebulaRef.current &&
+        nebulaRef.current.complete
+      ) {
+
+        ctx.save();
+
+        const driftX =
+          Math.sin(elapsed * 0.01) * 30;
+
+        const driftY =
+          Math.cos(elapsed * 0.01) * 20;
+
+        ctx.globalAlpha = 0.5;
+
+        ctx.globalCompositeOperation =
+          "screen";
+
+        const overscan = 100;
+
+        ctx.drawImage(
+          nebulaRef.current,
+          -overscan + driftX,
+          -overscan + driftY,
+          w + overscan * 2,
+          h + overscan * 2
+        );
+
+        ctx.restore();
+      }
 
       // solar motion
       const solarPos = getSolarSystemPosition(elapsed, w, centerY);
 
-      drawStars(ctx, starsRef.current, solarPos.x, w);
+      drawStars(
+        ctx,
+        starsRef.current,
+        solarPos.x,
+        w,
+        elapsed
+      );
 
       const barycenter = calculateBarycenterOffset(
         planets,

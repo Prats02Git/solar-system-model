@@ -38,7 +38,7 @@ export default function Controls({
     <div
       style={{
         position: "absolute",
-        top: 20,
+        top: 10,
         left: 20,
         zIndex: 10,
         display: "flex",

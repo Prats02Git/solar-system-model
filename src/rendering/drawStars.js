@@ -2,24 +2,44 @@ export function drawStars(
   ctx,
   stars,
   solarSystemX,
-  width
+  width,
+  elapsed
 ) {
   stars.forEach((star) => {
-
-    const speed =
-      0.2 + star.z * 0.8;
 
     const x =
       star.x -
       solarSystemX * 0.02;
 
     const size =
-      0.5 + star.z * 1.5;
+      star.size ||
+      (0.5 + star.z * 1.5);
 
-    ctx.globalAlpha =
-      0.3 + star.z;
+    const twinkle =
+      0.5 +
+      Math.sin(
+        elapsed * 2 +
+        star.phase
+      ) * 0.5;
 
-    ctx.fillStyle = "white";
+    const alpha =
+      0.2 +
+      twinkle * 0.8;
+
+    ctx.save();
+
+    ctx.globalAlpha = alpha;
+
+    if (size > 1.5) {
+      ctx.shadowBlur =
+        size * 8;
+
+      ctx.shadowColor =
+        "white";
+    }
+
+
+    ctx.fillStyle = star.color;
 
     ctx.beginPath();
 
@@ -32,7 +52,7 @@ export function drawStars(
     );
 
     ctx.fill();
-  });
 
-  ctx.globalAlpha = 1;
+    ctx.restore();
+  });
 }
