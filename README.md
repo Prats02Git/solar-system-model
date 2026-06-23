@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+Solar System Simulator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A visually rich Solar System Simulator built with React and HTML5 Canvas that demonstrates planetary motion using Keplerian orbital mechanics.
 
-## Available Scripts
+The project combines scientific concepts with interactive visualization, allowing users to explore how planets orbit the Sun while the Solar System itself moves through space.
 
-In the project directory, you can run:
+Features
+Interactive Solar System visualization
+Realistic elliptical planetary orbits
+Variable orbital speed based on Kepler's Equation
+Orbital eccentricity support for each planet
+Orbital inclination for pseudo-3D visualization
+Heliocentric camera mode
+Galactic camera mode
+Orbit Trails
+Space Trails
+Solar barycenter wobble influenced by planetary masses
+Dynamic star field with twinkling effects
+Planet information tooltips
+Mouse wheel zoom support
+Responsive desktop
+Physics & Simulation
 
-### `npm start`
+This project uses simplified astronomical models to create realistic planetary motion while maintaining excellent browser performance.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Keplerian Orbits
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Planet positions are calculated using:
 
-### `npm test`
+Mean Anomaly (M)
+Eccentric Anomaly (E)
+True Anomaly (θ)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Kepler's Equation is solved numerically using the Newton-Raphson method.
 
-### `npm run build`
+This produces:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Elliptical orbits
+Faster motion near perihelion
+Slower motion near aphelion
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+similar to how planets move in reality.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Orbital Inclination
 
-### `npm run eject`
+Each planet has its own orbital inclination.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The simulation projects inclined orbits into a pseudo-3D view, allowing planets to appear above and below the orbital plane.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Solar Barycenter Wobble
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The Sun does not remain perfectly stationary.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Large planets such as Jupiter and Saturn shift the Solar System's barycenter, causing a visible wobble in the Sun's position.
 
-## Learn More
+The simulator visualizes this effect using relative planetary masses.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Galactic Drift
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The Solar System is shown moving through space.
 
-### Code Splitting
+In Galactic Mode:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The camera remains fixed.
+The Sun travels across the screen.
+Planets continue orbiting while moving with the Solar System.
 
-### Analyzing the Bundle Size
+This reveals the difference between a planet's orbit around the Sun and its overall trajectory through space.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Camera Modes
+Heliocentric Mode
 
-### Making a Progressive Web App
+The camera follows the Sun.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Best for observing:
 
-### Advanced Configuration
+Planetary orbits
+Orbital eccentricity
+Relative planet motion
+Galactic Mode
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The camera remains stationary.
 
-### Deployment
+Best for observing:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Solar System motion
+Space trajectories
+Galactic-scale visualization
+Trail Modes
+Orbit Trail
 
-### `npm run build` fails to minify
+Shows a planet's path relative to the Sun.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Useful for studying:
+
+Elliptical orbits
+Orbital shape
+Orbital inclination
+Space Trail
+
+Shows the planet's trajectory through space while the Solar System itself moves.
+
+Useful for understanding:
+
+Galactic motion
+Relative reference frames
+Planet trajectories through space
+Technology Stack
+React
+JavaScript (ES6+)
+HTML5 Canvas
+CSS3
+Performance Optimizations
+
+The simulator is designed to run efficiently in the browser.
+
+Optimizations include:
+
+Canvas rendering instead of DOM animation
+React refs for simulation state
+Limited trail history
+Mobile-specific particle counts
+RequestAnimationFrame rendering loop
+Dynamic zoom scaling

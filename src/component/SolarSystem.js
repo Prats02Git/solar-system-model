@@ -40,7 +40,7 @@ export default function SolarSystem() {
   const hoveredRef = useRef(null);
 
   const [hoveredPlanet, setHoveredPlanet] = useState(null);
-  const [trailMode, setTrailMode] = useState("both");
+  const [trailMode, setTrailMode] = useState("orbit");
 
   const resetTrails = () => clearTrails(orbitTrails, spaceTrails);
 
@@ -101,7 +101,7 @@ export default function SolarSystem() {
       const isMobile = window.innerWidth < 768;
 
       starsRef.current = Array.from(
-        { length: isMobile ? 250 : 600 },
+        { length: 60 },
         () => ({
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
@@ -115,6 +115,20 @@ export default function SolarSystem() {
             "#fff4dd", // warm white
             "#ffe8c4"  // yellow-white
           ][Math.floor(Math.random() * 4)]
+        })
+      );
+
+      asteroidsRef.current =
+      Array.from(
+        { length: 150 },
+        () => ({
+          angle:
+            Math.random() *
+            Math.PI * 2,
+
+          radius:
+            180 +
+            Math.random() * 70
         })
       );
     };
